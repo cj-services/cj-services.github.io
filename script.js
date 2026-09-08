@@ -31,7 +31,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 6000,
     oldPrice: 8000,
-    icon: "https://cdn.simpleicons.org/disneyplus"
+    icon: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Disney%2B_2024.svg"
   },
 
   {
@@ -40,7 +40,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 6500,
     oldPrice: 9000,
-    icon: "https://cdn.simpleicons.org/disneyplus"
+    icon: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Disney%2B_2024.svg"
   },
 
   {
@@ -76,7 +76,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 5000,
     oldPrice: 7000,
-    icon: "https://cdn.simpleicons.org/primevideo"
+    icon: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Prime_Video_logo_%282024%29.svg"
   },
 
   {
@@ -85,7 +85,7 @@ const streamingProducts = [
     duration: "2 Meses",
     price: 7500,
     oldPrice: 10000,
-    icon: "https://cdn.simpleicons.org/primevideo"
+    icon: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Prime_Video_logo_%282024%29.svg"
   },
 
   {
@@ -94,7 +94,7 @@ const streamingProducts = [
     duration: "3 Meses",
     price: 9500,
     oldPrice: 12000,
-    icon: "https://cdn.simpleicons.org/primevideo"
+    icon: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Prime_Video_logo_%282024%29.svg"
   },
 
   {
@@ -112,7 +112,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 4500,
     oldPrice: 7000,
-    icon: "https://cdn.simpleicons.org/vix"
+    icon: "https://commons.wikimedia.org/wiki/Special:Redirect/file/ViX_Logo.svg"
   },
 
   {
@@ -675,11 +675,6 @@ function setupInternetPlans() {
             );
 
 
-          /*
-            SI YA ESTABA SELECCIONADO:
-            LO DESELECCIONAMOS.
-          */
-
           if (wasSelected) {
 
             button.classList.remove(
@@ -707,12 +702,6 @@ function setupInternetPlans() {
           }
 
 
-          /*
-            SI ERA OTRO PLAN:
-            QUITAMOS LA SELECCIÓN
-            ANTERIOR.
-          */
-
           card
             .querySelectorAll(
               ".internet-plan"
@@ -730,10 +719,6 @@ function setupInternetPlans() {
 
             });
 
-
-          /*
-            SELECCIONAMOS EL NUEVO PLAN.
-          */
 
           button.classList.add(
             "selected"
