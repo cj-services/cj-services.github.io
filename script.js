@@ -141,6 +141,7 @@ const streamingProducts = [
 const $ = (selector) =>
   document.querySelector(selector);
 
+
 const $$ = (selector) =>
   document.querySelectorAll(selector);
 
@@ -485,19 +486,41 @@ function scrollToSection(selector) {
 /* ================= INTERNET ================= */
 
 /*
-  IMPORTANTE:
+  FUNCIONAMIENTO:
 
-  Tocar un plan NO lo agrega al carrito.
-
-  Primero se selecciona.
-  Después aparece el botón:
-  "🛒 Agregar al carrito"
-
-  Solo ese botón agrega el producto.
+  1. Tocar un plan = seleccionarlo.
+  2. Tocar nuevamente el mismo plan = deseleccionarlo.
+  3. Seleccionar otro plan = cambia la selección.
+  4. Solo el botón "🛒 Agregar al carrito"
+     agrega el plan al carrito.
 */
 
 const selectedInternetPlans =
   new Map();
+
+
+function hideInternetCartButton(card) {
+
+  if (!card) return;
+
+  const addButton =
+    card.querySelector(
+      ".internet-add-cart"
+    );
+
+  if (!addButton) return;
+
+  addButton.style.display =
+    "none";
+
+  addButton.classList.remove(
+    "added"
+  );
+
+  addButton.textContent =
+    "🛒 Agregar al carrito";
+
+}
 
 
 function createInternetCartButton(
@@ -646,6 +669,50 @@ function setupInternetPlans() {
           if (!card) return;
 
 
+          const wasSelected =
+            button.classList.contains(
+              "selected"
+            );
+
+
+          /*
+            SI YA ESTABA SELECCIONADO:
+            LO DESELECCIONAMOS.
+          */
+
+          if (wasSelected) {
+
+            button.classList.remove(
+              "selected"
+            );
+
+            button.setAttribute(
+              "aria-pressed",
+              "false"
+            );
+
+
+            selectedInternetPlans.delete(
+              card
+            );
+
+
+            hideInternetCartButton(
+              card
+            );
+
+
+            return;
+
+          }
+
+
+          /*
+            SI ERA OTRO PLAN:
+            QUITAMOS LA SELECCIÓN
+            ANTERIOR.
+          */
+
           card
             .querySelectorAll(
               ".internet-plan"
@@ -663,6 +730,10 @@ function setupInternetPlans() {
 
             });
 
+
+          /*
+            SELECCIONAMOS EL NUEVO PLAN.
+          */
 
           button.classList.add(
             "selected"
