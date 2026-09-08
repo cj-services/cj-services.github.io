@@ -1,10 +1,7 @@
-/* =====================================================
-   PERSONALNET
-   SCRIPT PRINCIPAL
-===================================================== */
+"use strict";
 
 
-/* ================= CONFIGURACIÓN ================= */
+/* ================= CONFIG ================= */
 
 const WHATSAPP = "5493844546841";
 
@@ -20,235 +17,713 @@ const HTTP_CUSTOM_URL =
 const streamingProducts = [
 
   {
-    id: "netflix",
+    id: "netflix-premium",
     name: "Netflix Premium 4K",
     duration: "1 Mes",
-    oldPrice: 13000,
     price: 10000,
-    logo: "N",
-    color: "#E50914"
+    oldPrice: 13000,
+    icon: "N"
   },
 
   {
     id: "disney-standard",
     name: "Disney+ Estándar",
     duration: "1 Mes",
-    oldPrice: 8000,
     price: 6000,
-    logo: "D+",
-    color: "#2563EB"
+    oldPrice: 8000,
+    icon: "D"
   },
 
   {
     id: "disney-premium",
     name: "Disney+ Premium",
     duration: "1 Mes",
-    oldPrice: 9000,
     price: 6500,
-    logo: "D+",
-    color: "#2563EB"
+    oldPrice: 9000,
+    icon: "D+"
   },
 
   {
-    id: "max-1",
+    id: "hbo-1",
     name: "HBO Max",
     duration: "1 Mes",
-    oldPrice: 7000,
     price: 5000,
-    logo: "MAX",
-    color: "#8B5CF6"
+    oldPrice: 7000,
+    icon: "H"
   },
 
   {
-    id: "max-2",
+    id: "hbo-2",
     name: "HBO Max",
     duration: "2 Meses",
-    oldPrice: 10000,
     price: 7500,
-    logo: "MAX",
-    color: "#8B5CF6"
+    oldPrice: 10000,
+    icon: "H"
   },
 
   {
-    id: "max-3",
+    id: "hbo-3",
     name: "HBO Max",
     duration: "3 Meses",
-    oldPrice: 12000,
     price: 9500,
-    logo: "MAX",
-    color: "#8B5CF6"
+    oldPrice: 12000,
+    icon: "H"
   },
 
   {
     id: "prime-1",
     name: "Prime Video",
     duration: "1 Mes",
-    oldPrice: 7000,
     price: 5000,
-    logo: "prime",
-    color: "#00A8E1"
+    oldPrice: 7000,
+    icon: "P"
   },
 
   {
     id: "prime-2",
     name: "Prime Video",
     duration: "2 Meses",
-    oldPrice: 10000,
     price: 7500,
-    logo: "prime",
-    color: "#00A8E1"
+    oldPrice: 10000,
+    icon: "P"
   },
 
   {
     id: "prime-3",
     name: "Prime Video",
     duration: "3 Meses",
-    oldPrice: 12000,
     price: 9500,
-    logo: "prime",
-    color: "#00A8E1"
+    oldPrice: 12000,
+    icon: "P"
   },
 
   {
     id: "paramount",
     name: "Paramount+",
     duration: "1 Mes",
-    oldPrice: 8000,
     price: 6500,
-    logo: "P+",
-    color: "#0064FF"
+    oldPrice: 8000,
+    icon: "P+"
   },
 
   {
     id: "vix",
     name: "ViX",
     duration: "1 Mes",
-    oldPrice: 7000,
     price: 4500,
-    logo: "ViX",
-    color: "#F59E0B"
+    oldPrice: 7000,
+    icon: "ViX"
   },
 
   {
-    id: "apple",
+    id: "apple-tv",
     name: "Apple TV+",
     duration: "1 Mes",
-    oldPrice: 7000,
     price: 4500,
-    logo: " TV",
-    color: "#FFFFFF"
+    oldPrice: 7000,
+    icon: ""
   },
 
   {
     id: "youtube",
     name: "YouTube Premium",
     duration: "1 Mes",
-    oldPrice: 7500,
     price: 5000,
-    logo: "YT",
-    color: "#FF0033"
+    oldPrice: 7500,
+    icon: "▶"
   }
 
 ];
 
 
-/* ================= CARRITO ================= */
+/* ================= ELEMENTOS ================= */
 
-let cart = JSON.parse(
-  localStorage.getItem("personalnet_cart") || "[]"
-);
-
-
-/* ================= HELPERS ================= */
-
-const $ = selector =>
+const $ = (selector) =>
   document.querySelector(selector);
 
+const $$ = (selector) =>
+  document.querySelectorAll(selector);
 
-const $$ = selector =>
-  [...document.querySelectorAll(selector)];
+
+/* ================= CART ================= */
+
+let cart = [];
+
+const CART_KEY = "personalnet_cart";
+
+
+function loadCart() {
+
+  try {
+
+    const saved =
+      localStorage.getItem(CART_KEY);
+
+    cart = saved
+      ? JSON.parse(saved)
+      : [];
+
+    if (!Array.isArray(cart)) {
+      cart = [];
+    }
+
+  } catch {
+
+    cart = [];
+
+  }
+
+}
+
+
+function saveCart() {
+
+  localStorage.setItem(
+    CART_KEY,
+    JSON.stringify(cart)
+  );
+
+}
 
 
 function money(value) {
 
   return "$" +
-    Number(value).toLocaleString("es-AR");
+    Number(value).toLocaleString(
+      "es-AR"
+    );
 
 }
 
 
-/* ================= CART FUNCTIONS ================= */
+function showToast(message) {
 
-function saveCart() {
+  const toast = $("#toast");
 
-  localStorage.setItem(
-    "personalnet_cart",
-    JSON.stringify(cart)
+  if (!toast) return;
+
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+  clearTimeout(
+    showToast.timer
   );
 
-  updateCart();
+  showToast.timer =
+    setTimeout(() => {
+
+      toast.classList.remove("show");
+
+    }, 1800);
 
 }
 
 
-function getCartCount() {
+/* ================= ADD TO CART ================= */
 
-  return cart.reduce(
-    (total, item) =>
-      total + item.quantity,
-    0
+function addToCart(product) {
+
+  const existing =
+    cart.find(
+      item => item.id === product.id
+    );
+
+  if (existing) {
+
+    existing.quantity =
+      (existing.quantity || 1) + 1;
+
+  } else {
+
+    cart.push({
+      ...product,
+      quantity: 1
+    });
+
+  }
+
+  saveCart();
+
+  renderCart();
+
+  showToast(
+    "✓ Agregado al carrito"
   );
 
 }
 
 
-function getCartTotal() {
+/* ================= REMOVE ================= */
 
-  return cart.reduce(
-    (total, item) =>
-      total +
-      item.price *
-      item.quantity,
-    0
+function removeFromCart(id) {
+
+  cart =
+    cart.filter(
+      item => item.id !== id
+    );
+
+  saveCart();
+
+  renderCart();
+
+}
+
+
+/* ================= CART RENDER ================= */
+
+function renderCart() {
+
+  const box =
+    $("#cartItems");
+
+  const empty =
+    $("#cartEmpty");
+
+  const footer =
+    $("#cartFooter");
+
+  const count =
+    cart.reduce(
+      (total, item) =>
+        total + (item.quantity || 1),
+      0
+    );
+
+  const total =
+    cart.reduce(
+      (sum, item) =>
+        sum +
+        Number(item.price) *
+        (item.quantity || 1),
+      0
+    );
+
+
+  if ($("#cartCount")) {
+    $("#cartCount").textContent =
+      count;
+  }
+
+
+  if ($("#bottomCartCount")) {
+    $("#bottomCartCount").textContent =
+      count;
+  }
+
+
+  if (!box) return;
+
+
+  box.innerHTML = "";
+
+
+  if (!cart.length) {
+
+    empty.style.display = "block";
+
+    footer.style.display = "none";
+
+    return;
+
+  }
+
+
+  empty.style.display = "none";
+
+  footer.style.display = "block";
+
+
+  cart.forEach(item => {
+
+    const row =
+      document.createElement("div");
+
+    row.className =
+      "cart-item";
+
+
+    const quantity =
+      item.quantity || 1;
+
+
+    row.innerHTML = `
+
+      <div>
+
+        <strong>
+          ${escapeHTML(item.name)}
+        </strong>
+
+        <small>
+          ${escapeHTML(item.duration || "")}
+          ${quantity > 1
+            ? ` · Cantidad: ${quantity}`
+            : ""}
+        </small>
+
+        <button
+          type="button"
+          class="remove"
+          data-remove="${escapeHTML(item.id)}"
+        >
+          Quitar
+        </button>
+
+      </div>
+
+      <div class="cart-price">
+        ${money(
+          Number(item.price) *
+          quantity
+        )}
+      </div>
+
+    `;
+
+
+    box.appendChild(row);
+
+  });
+
+
+  $("#cartTotal").textContent =
+    money(total);
+
+
+  box
+    .querySelectorAll(
+      "[data-remove]"
+    )
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          removeFromCart(
+            button.dataset.remove
+          );
+
+        }
+      );
+
+    });
+
+}
+
+
+/* ================= ESCAPE HTML ================= */
+
+function escapeHTML(value) {
+
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+/* ================= MODALS ================= */
+
+function openModal(id) {
+
+  const modal =
+    document.getElementById(id);
+
+  if (!modal) return;
+
+  modal.classList.add("open");
+
+}
+
+
+function closeModal(id) {
+
+  const modal =
+    document.getElementById(id);
+
+  if (!modal) return;
+
+  modal.classList.remove("open");
+
+}
+
+
+function closeAllModals() {
+
+  $$(".modal").forEach(
+    modal =>
+      modal.classList.remove("open")
   );
 
 }
 
 
-/* ================= RENDER STREAMING ================= */
+/* ================= SCROLL ================= */
+
+function scrollToSection(selector) {
+
+  const element =
+    document.querySelector(selector);
+
+  if (!element) return;
+
+  closeAllModals();
+
+  element.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+
+}
+
+
+/* ================= INTERNET ================= */
+
+/*
+  IMPORTANTE:
+
+  Tocar un plan NO lo agrega al carrito.
+
+  Primero se selecciona.
+  Después aparece el botón:
+  "🛒 Agregar al carrito"
+
+  Solo ese botón agrega el producto.
+*/
+
+const selectedInternetPlans =
+  new Map();
+
+
+function createInternetCartButton(
+  planButton
+) {
+
+  const card =
+    planButton.closest(
+      ".internet-card"
+    );
+
+  if (!card) return;
+
+
+  let addButton =
+    card.querySelector(
+      ".internet-add-cart"
+    );
+
+
+  if (!addButton) {
+
+    addButton =
+      document.createElement("button");
+
+    addButton.type =
+      "button";
+
+    addButton.className =
+      "button primary-button full internet-add-cart";
+
+    addButton.textContent =
+      "🛒 Agregar al carrito";
+
+
+    const plans =
+      card.querySelector(
+        ".internet-plans"
+      );
+
+
+    if (plans) {
+
+      plans.insertAdjacentElement(
+        "afterend",
+        addButton
+      );
+
+    }
+
+  }
+
+
+  selectedInternetPlans.set(
+    card,
+    planButton
+  );
+
+
+  addButton.style.display =
+    "flex";
+
+
+  addButton.classList.remove(
+    "added"
+  );
+
+
+  addButton.textContent =
+    "🛒 Agregar al carrito";
+
+
+  addButton.onclick = () => {
+
+    const selected =
+      selectedInternetPlans.get(
+        card
+      );
+
+    if (!selected) return;
+
+
+    addToCart({
+
+      id:
+        selected.dataset.product,
+
+      name:
+        selected.dataset.product,
+
+      duration:
+        "",
+
+      price:
+        Number(
+          selected.dataset.price
+        )
+
+    });
+
+
+    addButton.classList.add(
+      "added"
+    );
+
+    addButton.textContent =
+      "✓ Agregado al carrito";
+
+
+    setTimeout(() => {
+
+      addButton.classList.remove(
+        "added"
+      );
+
+      addButton.textContent =
+        "🛒 Agregar al carrito";
+
+    }, 1500);
+
+  };
+
+}
+
+
+function setupInternetPlans() {
+
+  $$(".internet-plan")
+    .forEach(button => {
+
+      button.setAttribute(
+        "aria-pressed",
+        "false"
+      );
+
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const card =
+            button.closest(
+              ".internet-card"
+            );
+
+          if (!card) return;
+
+
+          card
+            .querySelectorAll(
+              ".internet-plan"
+            )
+            .forEach(plan => {
+
+              plan.classList.remove(
+                "selected"
+              );
+
+              plan.setAttribute(
+                "aria-pressed",
+                "false"
+              );
+
+            });
+
+
+          button.classList.add(
+            "selected"
+          );
+
+          button.setAttribute(
+            "aria-pressed",
+            "true"
+          );
+
+
+          createInternetCartButton(
+            button
+          );
+
+        }
+      );
+
+    });
+
+}
+
+
+/* ================= STREAMING ================= */
 
 function renderStreaming() {
 
-  const grid = $("#streamGrid");
+  const grid =
+    $("#streamGrid");
 
   if (!grid) return;
 
 
-  grid.innerHTML =
-    streamingProducts.map(product => `
+  grid.innerHTML = "";
 
-      <article class="stream-card">
 
-        <div
-          class="stream-logo"
-          style="
-            color:${product.color};
-            border:1px solid ${product.color}22;
-          "
-        >
-          ${product.logo}
+  streamingProducts.forEach(
+    product => {
+
+      const card =
+        document.createElement(
+          "article"
+        );
+
+      card.className =
+        "stream-card";
+
+
+      card.innerHTML = `
+
+        <div class="stream-logo">
+          ${escapeHTML(product.icon)}
         </div>
-
 
         <h3>
-          ${product.name}
+          ${escapeHTML(product.name)}
         </h3>
 
-
         <div class="duration">
-          ${product.duration}
+          ${escapeHTML(product.duration)}
         </div>
-
 
         <div class="price-box">
 
@@ -262,265 +737,84 @@ function renderStreaming() {
 
         </div>
 
-
         <button
+          type="button"
           class="add-button"
-          data-stream="${product.id}"
+          data-streaming-id="${escapeHTML(product.id)}"
         >
           🛒 Agregar
         </button>
 
-      </article>
-
-    `).join("");
+      `;
 
 
-  $$(".add-button").forEach(button => {
-
-    button.addEventListener(
-      "click",
-      () => {
-
-        const product =
-          streamingProducts.find(
-            item =>
-              item.id ===
-              button.dataset.stream
-          );
-
-
-        addToCart({
-
-          id: product.id,
-
-          name: product.name,
-
-          duration: product.duration,
-
-          price: product.price
-
-        });
-
-
-        button.classList.add("added");
-
-        button.textContent =
-          "✓ Agregado";
-
-
-        setTimeout(() => {
-
-          button.classList.remove("added");
-
-          button.textContent =
-            "🛒 Agregar";
-
-        }, 900);
-
-      }
-    );
-
-  });
-
-}
-
-
-/* ================= ADD CART ================= */
-
-function addToCart(product) {
-
-  const existing =
-    cart.find(
-      item =>
-        item.id === product.id
-    );
-
-
-  if (existing) {
-
-    existing.quantity++;
-
-  } else {
-
-    cart.push({
-
-      ...product,
-
-      quantity: 1
-
-    });
-
-  }
-
-
-  saveCart();
-
-  showToast(
-    "Producto agregado al carrito"
-  );
-
-}
-
-
-/* ================= INTERNET ================= */
-
-$$(".internet-plan").forEach(button => {
-
-  button.addEventListener(
-    "click",
-    () => {
-
-      addToCart({
-
-        id:
-          button.dataset.product,
-
-        name:
-          button.dataset.product,
-
-        duration:
-          "",
-
-        price:
-          Number(
-            button.dataset.price
-          )
-
-      });
+      grid.appendChild(card);
 
     }
   );
 
-});
 
-
-/* ================= UPDATE CART ================= */
-
-function updateCart() {
-
-  const count =
-    getCartCount();
-
-
-  $("#cartCount").textContent =
-    count;
-
-  $("#bottomCartCount").textContent =
-    count;
-
-
-  const items =
-    $("#cartItems");
-
-  const empty =
-    $("#cartEmpty");
-
-  const footer =
-    $("#cartFooter");
-
-
-  if (!cart.length) {
-
-    items.innerHTML = "";
-
-    empty.style.display =
-      "block";
-
-    footer.style.display =
-      "none";
-
-  } else {
-
-    empty.style.display =
-      "none";
-
-    footer.style.display =
-      "block";
-
-
-    items.innerHTML =
-      cart.map(
-        (item, index) => `
-
-          <div class="cart-item">
-
-            <div>
-
-              <strong>
-                ${item.name}
-              </strong>
-
-              <small>
-                ${
-                  item.duration
-                    ? item.duration + " · "
-                    : ""
-                }
-
-                Cantidad:
-                ${item.quantity}
-
-              </small>
-
-
-              <button
-                class="remove"
-                data-remove="${index}"
-              >
-                Eliminar
-              </button>
-
-            </div>
-
-
-            <div class="cart-price">
-
-              ${money(
-                item.price *
-                item.quantity
-              )}
-
-            </div>
-
-          </div>
-
-        `
-      ).join("");
-
-
-    $$(".remove").forEach(button => {
+  grid
+    .querySelectorAll(
+      "[data-streaming-id]"
+    )
+    .forEach(button => {
 
       button.addEventListener(
         "click",
         () => {
 
-          const index =
-            Number(
-              button.dataset.remove
+          const product =
+            streamingProducts.find(
+              item =>
+                item.id ===
+                button.dataset.streamingId
             );
 
 
-          cart.splice(
-            index,
-            1
+          if (!product) return;
+
+
+          addToCart({
+
+            id:
+              product.id,
+
+            name:
+              product.name,
+
+            duration:
+              product.duration,
+
+            price:
+              product.price
+
+          });
+
+
+          button.classList.add(
+            "added"
           );
 
+          button.textContent =
+            "✓ Agregado";
 
-          saveCart();
+
+          setTimeout(() => {
+
+            button.classList.remove(
+              "added"
+            );
+
+            button.textContent =
+              "🛒 Agregar";
+
+          }, 1400);
 
         }
       );
 
     });
-
-  }
-
-
-  $("#cartTotal").textContent =
-    money(getCartTotal());
-
-
-  renderCheckout();
 
 }
 
@@ -529,242 +823,66 @@ function updateCart() {
 
 function renderCheckout() {
 
-  $("#checkoutTotal").textContent =
-    money(getCartTotal());
-
-
-  const container =
+  const box =
     $("#checkoutProducts");
 
-
-  if (!cart.length) {
-
-    container.innerHTML =
-      `<div class="checkout-line">
-        <span>Sin productos</span>
-        <span>$0</span>
-      </div>`;
-
-    return;
-
-  }
+  if (!box) return;
 
 
-  container.innerHTML =
-    cart.map(
-      item => `
-
-        <div class="checkout-line">
-
-          <span>
-            ${item.name}
-            × ${item.quantity}
-          </span>
-
-          <span>
-            ${money(
-              item.price *
-              item.quantity
-            )}
-          </span>
-
-        </div>
-
-      `
-    ).join("");
-
-}
+  box.innerHTML = "";
 
 
-/* ================= MODALS ================= */
-
-function openModal(id) {
-
-  const modal =
-    $(id);
-
-  if (!modal) return;
-
-
-  modal.classList.add("open");
-
-  document.body.style.overflow =
-    "hidden";
-
-}
+  const total =
+    cart.reduce(
+      (sum, item) =>
+        sum +
+        Number(item.price) *
+        (item.quantity || 1),
+      0
+    );
 
 
-function closeModal(id) {
+  cart.forEach(item => {
 
-  const modal =
-    $(id);
+    const line =
+      document.createElement("div");
 
-  if (!modal) return;
-
-
-  modal.classList.remove("open");
+    line.className =
+      "checkout-line";
 
 
-  if (
-    !document.querySelector(
-      ".modal.open"
-    )
-  ) {
+    const quantity =
+      item.quantity || 1;
 
-    document.body.style.overflow =
-      "";
 
-  }
+    line.innerHTML = `
+
+      <span>
+        ${escapeHTML(item.name)}
+        ${quantity > 1
+          ? ` × ${quantity}`
+          : ""}
+      </span>
+
+      <span>
+        ${money(
+          Number(item.price) *
+          quantity
+        )}
+      </span>
+
+    `;
+
+
+    box.appendChild(line);
+
+  });
+
+
+  $("#checkoutTotal").textContent =
+    money(total);
 
 }
-
-
-/* ================= CLOSE BUTTONS ================= */
-
-$$("[data-close]").forEach(button => {
-
-  button.addEventListener(
-    "click",
-    () => {
-
-      closeModal(
-        "#" +
-        button.dataset.close
-      );
-
-    }
-  );
-
-});
-
-
-/* ================= SCROLL ================= */
-
-$$("[data-scroll]").forEach(button => {
-
-  button.addEventListener(
-    "click",
-    () => {
-
-      const target =
-        button.dataset.scroll;
-
-
-      $$(".modal.open").forEach(
-        modal => {
-
-          closeModal(
-            "#" + modal.id
-          );
-
-        }
-      );
-
-
-      setTimeout(() => {
-
-        document
-          .querySelector(target)
-          ?.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
-
-      }, 50);
-
-    }
-  );
-
-});
-
-
-/* ================= MENU ================= */
-
-$("#menuButton")
-  .addEventListener(
-    "click",
-    () => {
-
-      openModal(
-        "#menuModal"
-      );
-
-    }
-  );
-
-
-$("#menuWhatsapp")
-  .addEventListener(
-    "click",
-    () => {
-
-      closeModal(
-        "#menuModal"
-      );
-
-      openWhatsApp(
-        "Hola PERSONALNET 👋 Quiero hacer una consulta."
-      );
-
-    }
-  );
-
-
-/* ================= CART ================= */
-
-$("#openCart")
-  .addEventListener(
-    "click",
-    () => {
-
-      openModal(
-        "#cartModal"
-      );
-
-    }
-  );
-
-
-$("#bottomCart")
-  .addEventListener(
-    "click",
-    () => {
-
-      openModal(
-        "#cartModal"
-      );
-
-    }
-  );
-
-
-$("#checkoutButton")
-  .addEventListener(
-    "click",
-    () => {
-
-      if (!cart.length) {
-
-        showToast(
-          "El carrito está vacío"
-        );
-
-        return;
-
-      }
-
-
-      closeModal(
-        "#cartModal"
-      );
-
-
-      openModal(
-        "#checkoutModal"
-      );
-
-    }
-  );
 
 
 /* ================= WHATSAPP ================= */
@@ -772,368 +890,330 @@ $("#checkoutButton")
 function openWhatsApp(message) {
 
   const url =
-    "https://wa.me/" +
-    WHATSAPP +
-    "?text=" +
-    encodeURIComponent(
-      message
-    );
-
+    `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
 
   window.open(
     url,
-    "_blank"
+    "_blank",
+    "noopener"
   );
 
 }
 
 
-$("#whatsappButton")
-  .addEventListener(
-    "click",
-    () => {
+/* ================= SEND ORDER ================= */
 
-      openWhatsApp(
-        "Hola PERSONALNET 👋 Quiero consultar por Internet o Streaming."
+function sendOrder() {
+
+  if (!cart.length) {
+
+    showToast(
+      "El carrito está vacío"
+    );
+
+    return;
+
+  }
+
+
+  const name =
+    $("#customerName").value.trim()
+    || "No indicado";
+
+
+  const phone =
+    $("#customerPhone").value.trim()
+    || "No indicado";
+
+
+  const total =
+    cart.reduce(
+      (sum, item) =>
+        sum +
+        Number(item.price) *
+        (item.quantity || 1),
+      0
+    );
+
+
+  const lines =
+    cart.map(item => {
+
+      const quantity =
+        item.quantity || 1;
+
+      return (
+        `• ${item.name}` +
+        `${item.duration
+          ? ` — ${item.duration}`
+          : ""}` +
+        `${quantity > 1
+          ? ` — Cantidad: ${quantity}`
+          : ""}` +
+        ` — ${money(
+          Number(item.price) *
+          quantity
+        )}`
       );
 
-    }
-  );
+    }).join("\n");
 
 
-$("#supportWhatsapp")
-  .addEventListener(
-    "click",
-    () => {
-
-      openWhatsApp(
-        "Hola PERSONALNET 👋 Necesito ayuda con una compra."
-      );
-
-    }
-  );
-
-
-/* ================= CHECKOUT FORM ================= */
-
-$("#checkoutForm")
-  .addEventListener(
-    "submit",
-    event => {
-
-      event.preventDefault();
-
-
-      if (!cart.length) {
-
-        showToast(
-          "El carrito está vacío"
-        );
-
-        return;
-
-      }
-
-
-      const name =
-        $("#customerName")
-          .value
-          .trim();
-
-
-      const phone =
-        $("#customerPhone")
-          .value
-          .trim();
-
-
-      const payment =
-        $("#paymentMethod")
-          .value;
-
-
-      const order =
-        "PN-" +
-        Date.now()
-          .toString()
-          .slice(-6);
-
-
-      const products =
-        cart.map(
-          item =>
-            `• ${item.name}` +
-            `${
-              item.duration
-                ? " (" +
-                  item.duration +
-                  ")"
-                : ""
-            }` +
-            ` × ${item.quantity}` +
-            ` — ${money(
-              item.price *
-              item.quantity
-            )}`
-        )
-        .join("\n");
-
-
-      const message =
+  const message =
 
 `Hola PERSONALNET 👋
 
-Quiero realizar una compra.
+Quiero realizar este pedido:
 
-Pedido: ${order}
+${lines}
+
+Total: ${money(total)}
 
 Nombre: ${name}
-
-WhatsApp: ${phone}
-
-Forma de pago: ${payment}
-
-${products}
-
-Total: ${money(
-  getCartTotal()
-)}
-
-Quedo atento para continuar con el pago.`;
+Teléfono: ${phone}`;
 
 
-      openWhatsApp(
-        message
-      );
+  openWhatsApp(message);
 
-
-      showToast(
-        "Pedido preparado"
-      );
-
-    }
-  );
+}
 
 
 /* ================= TRIAL ================= */
 
-$("#openTrial")
-  .addEventListener(
-    "click",
-    () => {
+function sendTrial() {
 
-      openModal(
-        "#trialModal"
-      );
-
-    }
-  );
+  const name =
+    $("#trialName").value.trim()
+    || "No indicado";
 
 
-$("#trialCglite")
-  .addEventListener(
-    "click",
-    () => {
-
-      openModal(
-        "#trialModal"
-      );
-
-    }
-  );
+  const phone =
+    $("#trialPhone").value.trim()
+    || "No indicado";
 
 
-$("#trialForm")
-  .addEventListener(
-    "submit",
-    event => {
-
-      event.preventDefault();
-
-
-      const operator =
-        $("#trialOperator")
-          .value;
-
-
-      const name =
-        $("#trialName")
-          .value
-          .trim();
-
-
-      const phone =
-        $("#trialPhone")
-          .value
-          .trim();
-
-
-      const message =
+  const message =
 
 `Hola PERSONALNET 👋
 
-Quiero Solicitar Una Prueba De Internet.
-
-Operadora: ${operator}
-
-Aplicación: CGLite
+Quiero solicitar una prueba.
 
 Nombre: ${name}
-
-WhatsApp: ${phone}`;
-
-
-      openWhatsApp(
-        message
-      );
+Teléfono: ${phone}`;
 
 
-      closeModal(
-        "#trialModal"
-      );
-
-
-      showToast(
-        "Solicitud preparada"
-      );
-
-    }
-  );
-
-
-/* ================= TOAST ================= */
-
-let toastTimer;
-
-
-function showToast(message) {
-
-  const toast =
-    $("#toast");
-
-
-  toast.textContent =
-    message;
-
-
-  toast.classList.add(
-    "show"
-  );
-
-
-  clearTimeout(
-    toastTimer
-  );
-
-
-  toastTimer =
-    setTimeout(
-      () => {
-
-        toast.classList.remove(
-          "show"
-        );
-
-      },
-      2200
-    );
+  openWhatsApp(message);
 
 }
 
 
-/* ================= NAV ACTIVE ================= */
+/* ================= EVENTS ================= */
 
-window.addEventListener(
-  "scroll",
-  () => {
-
-    const sections = [
-      "inicio",
-      "internet",
-      "streaming"
-    ];
+function setupEvents() {
 
 
-    let current =
-      "inicio";
+  /* Scroll buttons */
 
+  $$("[data-scroll]")
+    .forEach(button => {
 
-    sections.forEach(
-      id => {
+      button.addEventListener(
+        "click",
+        () => {
 
-        const section =
-          document.getElementById(
-            id
+          scrollToSection(
+            button.dataset.scroll
           );
 
-
-        if (
-          section &&
-          window.scrollY >=
-          section.offsetTop - 140
-        ) {
-
-          current = id;
-
         }
+      );
+
+    });
+
+
+  /* Menu */
+
+  $("#menuButton")
+    ?.addEventListener(
+      "click",
+      () => openModal("menuModal")
+    );
+
+
+  $("#cartButton")
+    ?.addEventListener(
+      "click",
+      () => {
+
+        renderCart();
+
+        openModal("cartModal");
 
       }
     );
 
 
-    $$(".nav-item")
-      .forEach(
-        item =>
-          item.classList.remove(
-            "active"
-          )
+  $("#bottomCart")
+    ?.addEventListener(
+      "click",
+      () => {
+
+        renderCart();
+
+        openModal("cartModal");
+
+      }
+    );
+
+
+  /* Close buttons */
+
+  $$("[data-close]")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          closeModal(
+            button.dataset.close
+          );
+
+        }
       );
 
-
-    const active =
-      document.querySelector(
-        `.nav-item[data-scroll="#${current}"]`
-      );
+    });
 
 
-    if (active) {
+  /* Checkout */
 
-      active.classList.add(
-        "active"
-      );
+  $("#checkoutButton")
+    ?.addEventListener(
+      "click",
+      () => {
 
-    }
+        if (!cart.length) {
 
-  }
-);
+          showToast(
+            "El carrito está vacío"
+          );
 
+          return;
 
-/* ================= ESC ================= */
+        }
 
-document.addEventListener(
-  "keydown",
-  event => {
+        renderCheckout();
 
-    if (
-      event.key === "Escape"
-    ) {
-
-      $$(".modal.open")
-        .forEach(
-          modal =>
-            closeModal(
-              "#" + modal.id
-            )
+        openModal(
+          "checkoutModal"
         );
 
-    }
-
-  }
-);
+      }
+    );
 
 
-/* ================= START ================= */
+  /* WhatsApp */
+
+  $("#sendOrder")
+    ?.addEventListener(
+      "click",
+      sendOrder
+    );
+
+
+  $("#supportButton")
+    ?.addEventListener(
+      "click",
+      () => {
+
+        openWhatsApp(
+          "Hola PERSONALNET 👋 Necesito ayuda."
+        );
+
+      }
+    );
+
+
+  $("#whatsappQuick")
+    ?.addEventListener(
+      "click",
+      () => {
+
+        openWhatsApp(
+          "Hola PERSONALNET 👋 Quiero consultar por los servicios."
+        );
+
+      }
+    );
+
+
+  $("#menuWhatsapp")
+    ?.addEventListener(
+      "click",
+      () => {
+
+        openWhatsApp(
+          "Hola PERSONALNET 👋 Quiero consultar por los servicios."
+        );
+
+      }
+    );
+
+
+  /* Trial */
+
+  $("#trialButton")
+    ?.addEventListener(
+      "click",
+      () =>
+        openModal("trialModal")
+    );
+
+
+  $("#cgliteTrial")
+    ?.addEventListener(
+      "click",
+      () =>
+        openModal("trialModal")
+    );
+
+
+  $("#sendTrial")
+    ?.addEventListener(
+      "click",
+      sendTrial
+    );
+
+
+  /* Menu navigation closes modal */
+
+  $$("#menuModal [data-scroll]")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          closeModal(
+            "menuModal"
+          );
+
+        }
+      );
+
+    });
+
+}
+
+
+/* ================= INIT ================= */
+
+loadCart();
+
+renderCart();
 
 renderStreaming();
 
-updateCart();
+setupInternetPlans();
+
+setupEvents();
