@@ -13,405 +13,115 @@ const HTTP_CUSTOM_URL =
 /* ================= STREAMING ================= */
 
 const streamingProducts = [
-  {
-    id: "netflix-premium",
-    name: "Netflix Premium 4K",
-    duration: "1 Mes",
-    price: 10000,
-    oldPrice: 13000,
-    icon: "netflix"
-  },
-
-  {
-    id: "disney-standard",
-    name: "Disney+ Estándar",
-    duration: "1 Mes",
-    price: 6000,
-    oldPrice: 8000,
-    icon: "disney"
-  },
-
-  {
-    id: "disney-premium",
-    name: "Disney+ Premium",
-    duration: "1 Mes",
-    price: 6500,
-    oldPrice: 9000,
-    icon: "disney"
-  },
-
-  {
-    id: "hbo-1",
-    name: "HBO Max",
-    duration: "1 Mes",
-    price: 5000,
-    oldPrice: 7000,
-    icon: "hbo"
-  },
-
-  {
-    id: "hbo-2",
-    name: "HBO Max",
-    duration: "2 Meses",
-    price: 7500,
-    oldPrice: 10000,
-    icon: "hbo"
-  },
-
-  {
-    id: "hbo-3",
-    name: "HBO Max",
-    duration: "3 Meses",
-    price: 9500,
-    oldPrice: 12000,
-    icon: "hbo"
-  },
-
-  {
-    id: "prime-1",
-    name: "Prime Video",
-    duration: "1 Mes",
-    price: 5000,
-    oldPrice: 7000,
-    icon: "prime"
-  },
-
-  {
-    id: "prime-2",
-    name: "Prime Video",
-    duration: "2 Meses",
-    price: 7500,
-    oldPrice: 10000,
-    icon: "prime"
-  },
-
-  {
-    id: "prime-3",
-    name: "Prime Video",
-    duration: "3 Meses",
-    price: 9500,
-    oldPrice: 12000,
-    icon: "prime"
-  },
-
-  {
-    id: "paramount",
-    name: "Paramount+",
-    duration: "1 Mes",
-    price: 6500,
-    oldPrice: 8000,
-    icon: "paramount"
-  },
-
-  {
-    id: "vix",
-    name: "ViX",
-    duration: "1 Mes",
-    price: 4500,
-    oldPrice: 7000,
-    icon: "vix"
-  },
-
-  {
-    id: "apple-tv",
-    name: "Apple TV+",
-    duration: "1 Mes",
-    price: 4500,
-    oldPrice: 7000,
-    icon: "apple"
-  },
-
-  {
-    id: "youtube",
-    name: "YouTube Premium",
-    duration: "1 Mes",
-    price: 5000,
-    oldPrice: 7500,
-    icon: "youtube"
-  }
+  { id:"netflix-premium", name:"Netflix Premium 4K", duration:"1 Mes", price:10000, oldPrice:13000, icon:"netflix" },
+  { id:"disney-standard", name:"Disney+ Estándar", duration:"1 Mes", price:6000, oldPrice:8000, icon:"disney" },
+  { id:"disney-premium", name:"Disney+ Premium", duration:"1 Mes", price:6500, oldPrice:9000, icon:"disney" },
+  { id:"hbo-1", name:"HBO Max", duration:"1 Mes", price:5000, oldPrice:7000, icon:"hbo" },
+  { id:"hbo-2", name:"HBO Max", duration:"2 Meses", price:7500, oldPrice:10000, icon:"hbo" },
+  { id:"hbo-3", name:"HBO Max", duration:"3 Meses", price:9500, oldPrice:12000, icon:"hbo" },
+  { id:"prime-1", name:"Prime Video", duration:"1 Mes", price:5000, oldPrice:7000, icon:"prime" },
+  { id:"prime-2", name:"Prime Video", duration:"2 Meses", price:7500, oldPrice:10000, icon:"prime" },
+  { id:"prime-3", name:"Prime Video", duration:"3 Meses", price:9500, oldPrice:12000, icon:"prime" },
+  { id:"paramount", name:"Paramount+", duration:"1 Mes", price:6500, oldPrice:8000, icon:"paramount" },
+  { id:"vix", name:"ViX", duration:"1 Mes", price:4500, oldPrice:7000, icon:"vix" },
+  { id:"apple-tv", name:"Apple TV+", duration:"1 Mes", price:4500, oldPrice:7000, icon:"apple" },
+  { id:"youtube", name:"YouTube Premium", duration:"1 Mes", price:5000, oldPrice:7500, icon:"youtube" }
 ];
 
-/* ================= LOGOS ================= */
+/* ================= ICONOS ================= */
 
 function streamingLogo(type) {
-  const common =
-    'aria-hidden="true" focusable="false"';
 
-  switch (type) {
+  const logos = {
 
-    case "netflix":
-      return `
-        <svg ${common} viewBox="0 0 64 64">
-          <rect
-            x="4"
-            y="4"
-            width="56"
-            height="56"
-            rx="14"
-            fill="#111111"
-          />
-          <path
-            d="M17 13h10l10 38H27z"
-            fill="#E50914"
-          />
-          <path
-            d="M37 13h10v38H37z"
-            fill="#B20710"
-          />
-          <path
-            d="M27 13h10l10 38H37z"
-            fill="#E50914"
-          />
-        </svg>
-      `;
+    netflix: `
+      <span style="
+        color:#E50914!important;
+        font-size:28px!important;
+        font-weight:900!important;
+        line-height:1!important;
+        display:block!important;
+      ">N</span>
+    `,
 
-    case "disney":
-      return `
-        <svg ${common} viewBox="0 0 64 64">
-          <rect
-            x="4"
-            y="4"
-            width="56"
-            height="56"
-            rx="14"
-            fill="#111111"
-          />
+    disney: `
+      <span style="
+        color:#1687FF!important;
+        font-size:28px!important;
+        font-weight:900!important;
+        line-height:1!important;
+        display:block!important;
+      ">D</span>
+    `,
 
-          <path
-            d="M13 28
-               C23 19, 39 17, 51 23"
-            fill="none"
-            stroke="#1687FF"
-            stroke-width="3.5"
-            stroke-linecap="round"
-          />
+    hbo: `
+      <span style="
+        color:#000000!important;
+        font-size:25px!important;
+        font-weight:900!important;
+        line-height:1!important;
+        display:block!important;
+      ">H</span>
+    `,
 
-          <text
-            x="32"
-            y="43"
-            text-anchor="middle"
-            fill="#FFFFFF"
-            font-size="10"
-            font-family="Arial,sans-serif"
-            font-style="italic"
-            font-weight="700"
-          >
-            Disney+
-          </text>
-        </svg>
-      `;
+    prime: `
+      <span style="
+        color:#1687FF!important;
+        font-size:28px!important;
+        font-weight:900!important;
+        line-height:1!important;
+        display:block!important;
+      ">P</span>
+    `,
 
-    case "hbo":
-      return `
-        <svg ${common} viewBox="0 0 64 64">
-          <rect
-            x="4"
-            y="4"
-            width="56"
-            height="56"
-            rx="14"
-            fill="#111111"
-          />
+    paramount: `
+      <span style="
+        color:#1687FF!important;
+        font-size:28px!important;
+        font-weight:900!important;
+        line-height:1!important;
+        display:block!important;
+        position:relative;
+      ">P<span style="
+        color:#FF8A00!important;
+        font-size:15px!important;
+        vertical-align:top!important;
+        margin-left:1px!important;
+      ">+</span></span>
+    `,
 
-          <text
-            x="32"
-            y="40"
-            text-anchor="middle"
-            fill="#FFFFFF"
-            font-size="21"
-            font-family="Arial,sans-serif"
-            font-weight="900"
-            letter-spacing="-1"
-          >
-            HBO
-          </text>
-        </svg>
-      `;
+    vix: `
+      <span style="
+        color:#FF8A00!important;
+        font-size:27px!important;
+        font-weight:900!important;
+        line-height:1!important;
+        display:block!important;
+      ">V</span>
+    `,
 
-    case "prime":
-      return `
-        <svg ${common} viewBox="0 0 64 64">
-          <rect
-            x="4"
-            y="4"
-            width="56"
-            height="56"
-            rx="14"
-            fill="#111111"
-          />
+    apple: `
+      <span style="
+        color:#000000!important;
+        font-size:27px!important;
+        font-weight:900!important;
+        line-height:1!important;
+        display:block!important;
+      "></span>
+    `,
 
-          <text
-            x="32"
-            y="35"
-            text-anchor="middle"
-            fill="#FFFFFF"
-            font-size="13"
-            font-family="Arial,sans-serif"
-            font-weight="700"
-          >
-            prime
-          </text>
+    youtube: `
+      <span style="
+        color:#FF0000!important;
+        font-size:25px!important;
+        font-weight:900!important;
+        line-height:1!important;
+        display:block!important;
+      ">▶</span>
+    `
+  };
 
-          <path
-            d="M17 42
-               C26 48, 39 48, 48 42"
-            fill="none"
-            stroke="#20A8E0"
-            stroke-width="3"
-            stroke-linecap="round"
-          />
-
-          <path
-            d="M45 40l5 2-4 4"
-            fill="none"
-            stroke="#20A8E0"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      `;
-
-    case "paramount":
-      return `
-        <svg ${common} viewBox="0 0 64 64">
-          <rect
-            x="4"
-            y="4"
-            width="56"
-            height="56"
-            rx="14"
-            fill="#111111"
-          />
-
-          <path
-            d="M16 42L32 19L48 42"
-            fill="none"
-            stroke="#FFFFFF"
-            stroke-width="3"
-            stroke-linejoin="round"
-          />
-
-          <path
-            d="M21 43h22"
-            stroke="#FFFFFF"
-            stroke-width="2"
-            stroke-linecap="round"
-          />
-
-          <text
-            x="32"
-            y="52"
-            text-anchor="middle"
-            fill="#FFFFFF"
-            font-size="6.5"
-            font-family="Arial,sans-serif"
-            font-weight="700"
-          >
-            PARAMOUNT+
-          </text>
-        </svg>
-      `;
-
-    case "vix":
-      return `
-        <svg ${common} viewBox="0 0 64 64">
-          <rect
-            x="4"
-            y="4"
-            width="56"
-            height="56"
-            rx="14"
-            fill="#111111"
-          />
-
-          <text
-            x="32"
-            y="43"
-            text-anchor="middle"
-            fill="#FF8A00"
-            font-size="24"
-            font-family="Arial,sans-serif"
-            font-weight="900"
-          >
-            ViX
-          </text>
-        </svg>
-      `;
-
-    case "apple":
-      return `
-        <svg ${common} viewBox="0 0 64 64">
-          <rect
-            x="4"
-            y="4"
-            width="56"
-            height="56"
-            rx="14"
-            fill="#111111"
-          />
-
-          <path
-            d="
-              M39 20
-              C37 20 35 21 32 23
-              C30 21 28 20 25 20
-              C20 20 16 25 16 31
-              C16 38 21 49 26 49
-              C29 49 30 47 32 47
-              C34 47 35 49 38 49
-              C42 49 47 41 48 35
-              C44 34 42 31 42 28
-              C42 25 44 23 47 21
-              C45 20 42 19 39 20
-              Z
-            "
-            fill="#FFFFFF"
-          />
-
-          <path
-            d="
-              M39 12
-              C39 16 36 19 32 19
-              C32 15 35 12 39 12
-              Z
-            "
-            fill="#FFFFFF"
-          />
-        </svg>
-      `;
-
-    case "youtube":
-      return `
-        <svg ${common} viewBox="0 0 64 64">
-          <rect
-            x="4"
-            y="4"
-            width="56"
-            height="56"
-            rx="14"
-            fill="#111111"
-          />
-
-          <rect
-            x="10"
-            y="18"
-            width="44"
-            height="28"
-            rx="9"
-            fill="#FF0000"
-          />
-
-          <path
-            d="M28 25L40 32L28 39Z"
-            fill="#FFFFFF"
-          />
-        </svg>
-      `;
-
-    default:
-      return "";
-  }
+  return logos[type] || "";
 }
 
 /* ================= ELEMENTOS ================= */
@@ -430,35 +140,27 @@ const CART_KEY = "personalnet_cart";
 
 function loadCart() {
   try {
-    const saved =
-      localStorage.getItem(CART_KEY);
-
-    cart = saved
-      ? JSON.parse(saved)
-      : [];
+    const saved = localStorage.getItem(CART_KEY);
+    cart = saved ? JSON.parse(saved) : [];
 
     if (!Array.isArray(cart)) {
       cart = [];
     }
-
   } catch {
     cart = [];
   }
 }
 
 function saveCart() {
-  localStorage.setItem(
-    CART_KEY,
-    JSON.stringify(cart)
-  );
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
 }
 
 function money(value) {
-  return "$" +
-    Number(value).toLocaleString("es-AR");
+  return "$" + Number(value).toLocaleString("es-AR");
 }
 
 function showToast(message) {
+
   const toast = $("#toast");
 
   if (!toast) return;
@@ -468,21 +170,18 @@ function showToast(message) {
 
   clearTimeout(showToast.timer);
 
-  showToast.timer =
-    setTimeout(() => {
-      toast.classList.remove("show");
-    }, 1800);
+  showToast.timer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 1800);
 }
 
 /* ================= ADD TO CART ================= */
 
 function addToCart(product) {
 
-  const existing =
-    cart.find(
-      item =>
-        item.id === product.id
-    );
+  const existing = cart.find(
+    item => item.id === product.id
+  );
 
   if (existing) {
 
@@ -500,20 +199,16 @@ function addToCart(product) {
   saveCart();
   renderCart();
 
-  showToast(
-    "✓ Agregado al carrito"
-  );
+  showToast("✓ Agregado al carrito");
 }
 
 /* ================= REMOVE ================= */
 
 function removeFromCart(id) {
 
-  cart =
-    cart.filter(
-      item =>
-        item.id !== id
-    );
+  cart = cart.filter(
+    item => item.id !== id
+  );
 
   saveCart();
   renderCart();
@@ -523,40 +218,30 @@ function removeFromCart(id) {
 
 function renderCart() {
 
-  const box =
-    $("#cartItems");
+  const box = $("#cartItems");
+  const empty = $("#cartEmpty");
+  const footer = $("#cartFooter");
 
-  const empty =
-    $("#cartEmpty");
+  const count = cart.reduce(
+    (total, item) =>
+      total + (item.quantity || 1),
+    0
+  );
 
-  const footer =
-    $("#cartFooter");
-
-  const count =
-    cart.reduce(
-      (total, item) =>
-        total +
-        (item.quantity || 1),
-      0
-    );
-
-  const total =
-    cart.reduce(
-      (sum, item) =>
-        sum +
-        Number(item.price) *
-        (item.quantity || 1),
-      0
-    );
+  const total = cart.reduce(
+    (sum, item) =>
+      sum +
+      Number(item.price) *
+      (item.quantity || 1),
+    0
+  );
 
   if ($("#cartCount")) {
-    $("#cartCount").textContent =
-      count;
+    $("#cartCount").textContent = count;
   }
 
   if ($("#bottomCartCount")) {
-    $("#bottomCartCount").textContent =
-      count;
+    $("#bottomCartCount").textContent = count;
   }
 
   if (!box) return;
@@ -566,37 +251,30 @@ function renderCart() {
   if (!cart.length) {
 
     if (empty) {
-      empty.style.display =
-        "block";
+      empty.style.display = "block";
     }
 
     if (footer) {
-      footer.style.display =
-        "none";
+      footer.style.display = "none";
     }
 
     return;
   }
 
   if (empty) {
-    empty.style.display =
-      "none";
+    empty.style.display = "none";
   }
 
   if (footer) {
-    footer.style.display =
-      "block";
+    footer.style.display = "block";
   }
 
   cart.forEach(item => {
 
     const row =
-      document.createElement(
-        "div"
-      );
+      document.createElement("div");
 
-    row.className =
-      "cart-item";
+    row.className = "cart-item";
 
     const quantity =
       item.quantity || 1;
@@ -609,9 +287,7 @@ function renderCart() {
         </strong>
 
         <small>
-          ${escapeHTML(
-            item.duration || ""
-          )}
+          ${escapeHTML(item.duration || "")}
 
           ${
             quantity > 1
@@ -632,8 +308,7 @@ function renderCart() {
 
       <div class="cart-price">
         ${money(
-          Number(item.price) *
-          quantity
+          Number(item.price) * quantity
         )}
       </div>
     `;
@@ -642,24 +317,19 @@ function renderCart() {
   });
 
   if ($("#cartTotal")) {
-    $("#cartTotal").textContent =
-      money(total);
+    $("#cartTotal").textContent = money(total);
   }
 
   box
-    .querySelectorAll(
-      "[data-remove]"
-    )
+    .querySelectorAll("[data-remove]")
     .forEach(button => {
 
       button.addEventListener(
         "click",
         () => {
-
           removeFromCart(
             button.dataset.remove
           );
-
         }
       );
 
@@ -671,26 +341,11 @@ function renderCart() {
 function escapeHTML(value) {
 
   return String(value)
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 /* ================= MODALS ================= */
@@ -702,9 +357,7 @@ function openModal(id) {
 
   if (!modal) return;
 
-  modal.classList.add(
-    "open"
-  );
+  modal.classList.add("open");
 }
 
 function closeModal(id) {
@@ -714,20 +367,15 @@ function closeModal(id) {
 
   if (!modal) return;
 
-  modal.classList.remove(
-    "open"
-  );
+  modal.classList.remove("open");
 }
 
 function closeAllModals() {
 
-  $$(".modal")
-    .forEach(
-      modal =>
-        modal.classList.remove(
-          "open"
-        )
-    );
+  $$(".modal").forEach(
+    modal =>
+      modal.classList.remove("open")
+  );
 }
 
 /* ================= SCROLL ================= */
@@ -735,9 +383,7 @@ function closeAllModals() {
 function scrollToSection(selector) {
 
   const element =
-    document.querySelector(
-      selector
-    );
+    document.querySelector(selector);
 
   if (!element) return;
 
@@ -751,56 +397,41 @@ function scrollToSection(selector) {
 
 /* ================= INTERNET ================= */
 
-const selectedInternetPlans =
-  new Map();
+const selectedInternetPlans = new Map();
 
 function hideInternetCartButton(card) {
 
   if (!card) return;
 
   const addButton =
-    card.querySelector(
-      ".internet-add-cart"
-    );
+    card.querySelector(".internet-add-cart");
 
   if (!addButton) return;
 
-  addButton.style.display =
-    "none";
+  addButton.style.display = "none";
 
-  addButton.classList.remove(
-    "added"
-  );
+  addButton.classList.remove("added");
 
   addButton.textContent =
     "🛒 Agregar al carrito";
 }
 
-function createInternetCartButton(
-  planButton
-) {
+function createInternetCartButton(planButton) {
 
   const card =
-    planButton.closest(
-      ".internet-card"
-    );
+    planButton.closest(".internet-card");
 
   if (!card) return;
 
   let addButton =
-    card.querySelector(
-      ".internet-add-cart"
-    );
+    card.querySelector(".internet-add-cart");
 
   if (!addButton) {
 
     addButton =
-      document.createElement(
-        "button"
-      );
+      document.createElement("button");
 
-    addButton.type =
-      "button";
+    addButton.type = "button";
 
     addButton.className =
       "button primary-button full internet-add-cart";
@@ -809,12 +440,9 @@ function createInternetCartButton(
       "🛒 Agregar al carrito";
 
     const plans =
-      card.querySelector(
-        ".internet-plans"
-      );
+      card.querySelector(".internet-plans");
 
     if (plans) {
-
       plans.insertAdjacentElement(
         "afterend",
         addButton
@@ -827,12 +455,9 @@ function createInternetCartButton(
     planButton
   );
 
-  addButton.style.display =
-    "flex";
+  addButton.style.display = "flex";
 
-  addButton.classList.remove(
-    "added"
-  );
+  addButton.classList.remove("added");
 
   addButton.textContent =
     "🛒 Agregar al carrito";
@@ -840,41 +465,32 @@ function createInternetCartButton(
   addButton.onclick = () => {
 
     const selected =
-      selectedInternetPlans.get(
-        card
-      );
+      selectedInternetPlans.get(card);
 
     if (!selected) return;
 
     addToCart({
 
-      id:
-        selected.dataset.product,
+      id: selected.dataset.product,
 
-      name:
-        selected.dataset.product,
+      name: selected.dataset.product,
 
-      duration:
-        "",
+      duration: "",
 
-      price:
-        Number(
-          selected.dataset.price
-        )
+      price: Number(
+        selected.dataset.price
+      )
+
     });
 
-    addButton.classList.add(
-      "added"
-    );
+    addButton.classList.add("added");
 
     addButton.textContent =
       "✓ Agregado al carrito";
 
     setTimeout(() => {
 
-      addButton.classList.remove(
-        "added"
-      );
+      addButton.classList.remove("added");
 
       addButton.textContent =
         "🛒 Agregar al carrito";
@@ -885,173 +501,133 @@ function createInternetCartButton(
 
 function setupInternetPlans() {
 
-  $$(".internet-plan")
-    .forEach(button => {
+  $$(".internet-plan").forEach(button => {
 
-      button.setAttribute(
-        "aria-pressed",
-        "false"
-      );
+    button.setAttribute(
+      "aria-pressed",
+      "false"
+    );
 
-      button.addEventListener(
-        "click",
-        () => {
+    button.addEventListener(
+      "click",
+      () => {
 
-          const card =
-            button.closest(
-              ".internet-card"
-            );
+        const card =
+          button.closest(".internet-card");
 
-          if (!card) return;
+        if (!card) return;
 
-          const wasSelected =
-            button.classList.contains(
-              "selected"
-            );
+        const wasSelected =
+          button.classList.contains("selected");
 
-          if (wasSelected) {
+        if (wasSelected) {
 
-            button.classList.remove(
-              "selected"
-            );
+          button.classList.remove("selected");
 
-            button.setAttribute(
+          button.setAttribute(
+            "aria-pressed",
+            "false"
+          );
+
+          selectedInternetPlans.delete(card);
+
+          hideInternetCartButton(card);
+
+          return;
+        }
+
+        card
+          .querySelectorAll(".internet-plan")
+          .forEach(plan => {
+
+            plan.classList.remove("selected");
+
+            plan.setAttribute(
               "aria-pressed",
               "false"
             );
 
-            selectedInternetPlans.delete(
-              card
-            );
+          });
 
-            hideInternetCartButton(
-              card
-            );
+        button.classList.add("selected");
 
-            return;
-          }
+        button.setAttribute(
+          "aria-pressed",
+          "true"
+        );
 
-          card
-            .querySelectorAll(
-              ".internet-plan"
-            )
-            .forEach(plan => {
-
-              plan.classList.remove(
-                "selected"
-              );
-
-              plan.setAttribute(
-                "aria-pressed",
-                "false"
-              );
-
-            });
-
-          button.classList.add(
-            "selected"
-          );
-
-          button.setAttribute(
-            "aria-pressed",
-            "true"
-          );
-
-          createInternetCartButton(
-            button
-          );
-
-        }
-      );
-
-    });
+        createInternetCartButton(button);
+      }
+    );
+  });
 }
 
 /* ================= STREAMING ================= */
 
 function renderStreaming() {
 
-  const grid =
-    $("#streamGrid");
+  const grid = $("#streamGrid");
 
   if (!grid) return;
 
   grid.innerHTML = "";
 
-  streamingProducts.forEach(
-    product => {
+  streamingProducts.forEach(product => {
 
-      const card =
-        document.createElement(
-          "article"
-        );
+    const card =
+      document.createElement("article");
 
-      card.className =
-        "stream-card";
+    card.className = "stream-card";
 
-      card.innerHTML = `
-        <div
-          class="stream-logo"
-          style="
-            display:flex!important;
-            align-items:center!important;
-            justify-content:center!important;
-            visibility:visible!important;
-            opacity:1!important;
-          "
-        >
-          ${streamingLogo(
-            product.icon
-          )}
+    card.innerHTML = `
+      <div
+        class="stream-logo"
+        style="
+          display:flex!important;
+          align-items:center!important;
+          justify-content:center!important;
+          visibility:visible!important;
+          opacity:1!important;
+          overflow:hidden!important;
+        "
+      >
+        ${streamingLogo(product.icon)}
+      </div>
+
+      <h3>
+        ${escapeHTML(product.name)}
+      </h3>
+
+      <div class="duration">
+        ${escapeHTML(product.duration)}
+      </div>
+
+      <div class="price-box">
+
+        <div class="old-price">
+          ${money(product.oldPrice)}
         </div>
 
-        <h3>
-          ${escapeHTML(
-            product.name
-          )}
-        </h3>
-
-        <div class="duration">
-          ${escapeHTML(
-            product.duration
-          )}
+        <div class="offer-price">
+          ${money(product.price)}
         </div>
 
-        <div class="price-box">
+      </div>
 
-          <div class="old-price">
-            ${money(
-              product.oldPrice
-            )}
-          </div>
+      <button
+        type="button"
+        class="add-button"
+        data-streaming-id="${escapeHTML(product.id)}"
+      >
+        🛒 Agregar
+      </button>
+    `;
 
-          <div class="offer-price">
-            ${money(
-              product.price
-            )}
-          </div>
-
-        </div>
-
-        <button
-          type="button"
-          class="add-button"
-          data-streaming-id="${escapeHTML(
-            product.id
-          )}"
-        >
-          🛒 Agregar
-        </button>
-      `;
-
-      grid.appendChild(card);
-    }
-  );
+    grid.appendChild(card);
+  });
 
   grid
-    .querySelectorAll(
-      "[data-streaming-id]"
-    )
+    .querySelectorAll("[data-streaming-id]")
     .forEach(button => {
 
       button.addEventListener(
@@ -1062,49 +638,38 @@ function renderStreaming() {
             streamingProducts.find(
               item =>
                 item.id ===
-                button.dataset
-                  .streamingId
+                button.dataset.streamingId
             );
 
           if (!product) return;
 
           addToCart({
 
-            id:
-              product.id,
+            id: product.id,
 
-            name:
-              product.name,
+            name: product.name,
 
-            duration:
-              product.duration,
+            duration: product.duration,
 
-            price:
-              product.price
+            price: product.price
 
           });
 
-          button.classList.add(
-            "added"
-          );
+          button.classList.add("added");
 
           button.textContent =
             "✓ Agregado";
 
           setTimeout(() => {
 
-            button.classList.remove(
-              "added"
-            );
+            button.classList.remove("added");
 
             button.textContent =
               "🛒 Agregar";
 
           }, 1400);
-
         }
       );
-
     });
 }
 
@@ -1131,21 +696,16 @@ function renderCheckout() {
   cart.forEach(item => {
 
     const line =
-      document.createElement(
-        "div"
-      );
+      document.createElement("div");
 
-    line.className =
-      "checkout-line";
+    line.className = "checkout-line";
 
     const quantity =
       item.quantity || 1;
 
     line.innerHTML = `
       <span>
-        ${escapeHTML(
-          item.name
-        )}
+        ${escapeHTML(item.name)}
 
         ${
           quantity > 1
@@ -1166,7 +726,6 @@ function renderCheckout() {
   });
 
   if ($("#checkoutTotal")) {
-
     $("#checkoutTotal").textContent =
       money(total);
   }
@@ -1177,9 +736,7 @@ function renderCheckout() {
 function openWhatsApp(message) {
 
   const url =
-    `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
-      message
-    )}`;
+    `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
 
   window.open(
     url,
@@ -1286,29 +843,26 @@ Teléfono: ${phone}`;
 
 function setupEvents() {
 
-  $$("[data-scroll]")
-    .forEach(button => {
+  $$("[data-scroll]").forEach(button => {
 
-      button.addEventListener(
-        "click",
-        () => {
+    button.addEventListener(
+      "click",
+      () => {
 
-          scrollToSection(
-            button.dataset.scroll
-          );
+        scrollToSection(
+          button.dataset.scroll
+        );
 
-        }
-      );
+      }
+    );
 
-    });
+  });
 
   $("#menuButton")
     ?.addEventListener(
       "click",
       () =>
-        openModal(
-          "menuModal"
-        )
+        openModal("menuModal")
     );
 
   $("#cartButton")
@@ -1318,9 +872,7 @@ function setupEvents() {
 
         renderCart();
 
-        openModal(
-          "cartModal"
-        );
+        openModal("cartModal");
 
       }
     );
@@ -1332,28 +884,25 @@ function setupEvents() {
 
         renderCart();
 
-        openModal(
-          "cartModal"
+        openModal("cartModal");
+
+      }
+    );
+
+  $$("[data-close]").forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        closeModal(
+          button.dataset.close
         );
 
       }
     );
 
-  $$("[data-close]")
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          closeModal(
-            button.dataset.close
-          );
-
-        }
-      );
-
-    });
+  });
 
   $("#checkoutButton")
     ?.addEventListener(
@@ -1371,9 +920,7 @@ function setupEvents() {
 
         renderCheckout();
 
-        openModal(
-          "checkoutModal"
-        );
+        openModal("checkoutModal");
 
       }
     );
@@ -1415,18 +962,14 @@ function setupEvents() {
     ?.addEventListener(
       "click",
       () =>
-        openModal(
-          "trialModal"
-        )
+        openModal("trialModal")
     );
 
   $("#cgliteTrial")
     ?.addEventListener(
       "click",
       () =>
-        openModal(
-          "trialModal"
-        )
+        openModal("trialModal")
     );
 
   $("#sendTrial")
@@ -1442,9 +985,7 @@ function setupEvents() {
         "click",
         () => {
 
-          closeModal(
-            "menuModal"
-          );
+          closeModal("menuModal");
 
         }
       );
