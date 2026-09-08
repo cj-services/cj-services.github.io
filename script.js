@@ -22,7 +22,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 10000,
     oldPrice: 13000,
-    icon: "N"
+    icon: "https://cdn.simpleicons.org/netflix"
   },
 
   {
@@ -31,7 +31,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 6000,
     oldPrice: 8000,
-    icon: "D"
+    icon: "https://cdn.simpleicons.org/disneyplus"
   },
 
   {
@@ -40,7 +40,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 6500,
     oldPrice: 9000,
-    icon: "D+"
+    icon: "https://cdn.simpleicons.org/disneyplus"
   },
 
   {
@@ -49,7 +49,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 5000,
     oldPrice: 7000,
-    icon: "H"
+    icon: "https://cdn.simpleicons.org/hbomax"
   },
 
   {
@@ -58,7 +58,7 @@ const streamingProducts = [
     duration: "2 Meses",
     price: 7500,
     oldPrice: 10000,
-    icon: "H"
+    icon: "https://cdn.simpleicons.org/hbomax"
   },
 
   {
@@ -67,7 +67,7 @@ const streamingProducts = [
     duration: "3 Meses",
     price: 9500,
     oldPrice: 12000,
-    icon: "H"
+    icon: "https://cdn.simpleicons.org/hbomax"
   },
 
   {
@@ -76,7 +76,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 5000,
     oldPrice: 7000,
-    icon: "P"
+    icon: "https://cdn.simpleicons.org/primevideo"
   },
 
   {
@@ -85,7 +85,7 @@ const streamingProducts = [
     duration: "2 Meses",
     price: 7500,
     oldPrice: 10000,
-    icon: "P"
+    icon: "https://cdn.simpleicons.org/primevideo"
   },
 
   {
@@ -94,7 +94,7 @@ const streamingProducts = [
     duration: "3 Meses",
     price: 9500,
     oldPrice: 12000,
-    icon: "P"
+    icon: "https://cdn.simpleicons.org/primevideo"
   },
 
   {
@@ -103,7 +103,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 6500,
     oldPrice: 8000,
-    icon: "P+"
+    icon: "https://cdn.simpleicons.org/paramountplus"
   },
 
   {
@@ -112,7 +112,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 4500,
     oldPrice: 7000,
-    icon: "ViX"
+    icon: "https://cdn.simpleicons.org/vix"
   },
 
   {
@@ -121,7 +121,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 4500,
     oldPrice: 7000,
-    icon: ""
+    icon: "https://cdn.simpleicons.org/appletv"
   },
 
   {
@@ -130,7 +130,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 5000,
     oldPrice: 7500,
-    icon: "▶"
+    icon: "https://cdn.simpleicons.org/youtube"
   }
 
 ];
@@ -785,7 +785,12 @@ function renderStreaming() {
       card.innerHTML = `
 
         <div class="stream-logo">
-          ${escapeHTML(product.icon)}
+
+          <img
+            src="${escapeHTML(product.icon)}"
+            alt="${escapeHTML(product.name)}"
+          >
+
         </div>
 
         <h3>
