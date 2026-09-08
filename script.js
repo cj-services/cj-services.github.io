@@ -121,7 +121,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 4500,
     oldPrice: 7000,
-    icon: ""
+    icon: "TV"
   },
 
   {
@@ -140,7 +140,6 @@ const streamingProducts = [
 
 const $ = (selector) =>
   document.querySelector(selector);
-
 
 const $$ = (selector) =>
   document.querySelectorAll(selector);
@@ -485,16 +484,6 @@ function scrollToSection(selector) {
 
 /* ================= INTERNET ================= */
 
-/*
-  FUNCIONAMIENTO:
-
-  1. Tocar un plan = seleccionarlo.
-  2. Tocar nuevamente el mismo plan = deseleccionarlo.
-  3. Seleccionar otro plan = cambia la selección.
-  4. Solo el botón "🛒 Agregar al carrito"
-     agrega el plan al carrito.
-*/
-
 const selectedInternetPlans =
   new Map();
 
@@ -790,7 +779,11 @@ function renderStreaming() {
                 >
               `
 
-              : escapeHTML(product.icon)
+              : `
+                <span class="stream-logo-text">
+                  ${escapeHTML(product.icon)}
+                </span>
+              `
           }
 
         </div>
@@ -1090,8 +1083,6 @@ Teléfono: ${phone}`;
 function setupEvents() {
 
 
-  /* Scroll buttons */
-
   $$("[data-scroll]")
     .forEach(button => {
 
@@ -1108,8 +1099,6 @@ function setupEvents() {
 
     });
 
-
-  /* Menu */
 
   $("#menuButton")
     ?.addEventListener(
@@ -1144,8 +1133,6 @@ function setupEvents() {
     );
 
 
-  /* Close buttons */
-
   $$("[data-close]")
     .forEach(button => {
 
@@ -1162,8 +1149,6 @@ function setupEvents() {
 
     });
 
-
-  /* Checkout */
 
   $("#checkoutButton")
     ?.addEventListener(
@@ -1189,8 +1174,6 @@ function setupEvents() {
       }
     );
 
-
-  /* WhatsApp */
 
   $("#sendOrder")
     ?.addEventListener(
@@ -1238,8 +1221,6 @@ function setupEvents() {
     );
 
 
-  /* Trial */
-
   $("#trialButton")
     ?.addEventListener(
       "click",
@@ -1262,8 +1243,6 @@ function setupEvents() {
       sendTrial
     );
 
-
-  /* Menu navigation closes modal */
 
   $$("#menuModal [data-scroll]")
     .forEach(button => {
