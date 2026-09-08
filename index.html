@@ -1,19 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover"
-  >
-
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#080A0F">
-
-  <meta
-    name="description"
-    content="PERSONALNET — Internet ilimitado y Streaming."
-  >
 
   <title>PERSONALNET | Internet + Streaming</title>
 
@@ -28,23 +19,15 @@
 
   <header class="header">
 
-    <button
-      class="header-button"
-      id="menuButton"
-      aria-label="Abrir menú"
-    >
+    <button class="header-button" id="menuButton" aria-label="Abrir menú">
       ☰
     </button>
 
-    <a href="#inicio" class="logo">
+    <div class="logo">
       PERSONAL<span>NET</span>
-    </a>
+    </div>
 
-    <button
-      class="header-button cart-button"
-      id="openCart"
-      aria-label="Abrir carrito"
-    >
+    <button class="header-button cart-button" id="cartButton" aria-label="Abrir carrito">
       🛒
       <b id="cartCount">0</b>
     </button>
@@ -52,64 +35,59 @@
   </header>
 
 
-  <main id="inicio">
+  <!-- ================= HERO ================= -->
 
-    <!-- ================= HERO ================= -->
+  <main>
 
-    <section class="hero">
+    <section class="hero" id="inicio">
 
       <div class="hero-glow"></div>
 
-      <span class="eyebrow">
-        PERSONALNET STORE
-      </span>
+      <div class="eyebrow">
+        INTERNET + STREAMING
+      </div>
 
       <h1>
-        INTERNET <span>+</span> STREAMING
+        TODO EN <span>UN LUGAR</span>
       </h1>
 
       <p>
-        TODO EN UN LUGAR
+        Internet, entretenimiento y servicios digitales.
       </p>
-
 
       <div class="main-services">
 
         <button
+          type="button"
           class="main-service"
           data-scroll="#internet"
         >
 
-          <div class="service-icon">
-            🌐
-          </div>
+          <span class="service-icon">🌐</span>
 
-          <strong>
-            INTERNET
-          </strong>
+          <strong>Internet</strong>
 
           <small>
-            Ver Servicio <b>›</b>
+            Planes ilimitados
+            <b>›</b>
           </small>
 
         </button>
 
 
         <button
+          type="button"
           class="main-service"
           data-scroll="#streaming"
         >
 
-          <div class="service-icon">
-            🍿
-          </div>
+          <span class="service-icon">🎬</span>
 
-          <strong>
-            CUENTAS
-          </strong>
+          <strong>Streaming</strong>
 
           <small>
-            Ver Servicio <b>›</b>
+            Plataformas
+            <b>›</b>
           </small>
 
         </button>
@@ -119,60 +97,39 @@
     </section>
 
 
-    <!-- ================= ACCIONES ================= -->
+    <!-- ================= QUICK ACTIONS ================= -->
 
     <section class="quick-actions">
 
-      <button
-        class="quick-card"
-        id="openTrial"
-      >
+      <button class="quick-card" id="trialButton">
 
-        <span>🧪</span>
+        <span>🎁</span>
 
-        <strong>
-          Solicitar Prueba
-        </strong>
+        <strong>Solicitar Prueba</strong>
 
-        <small>
-          CGLite
-        </small>
+        <small>Probá el servicio</small>
 
       </button>
 
 
-      <button
-        class="quick-card"
-        data-scroll="#apps"
-      >
+      <button class="quick-card" data-scroll="#apps">
 
         <span>📲</span>
 
-        <strong>
-          Descargar Apps
-        </strong>
+        <strong>Descargar Apps</strong>
 
-        <small>
-          APK / Play Store
-        </small>
+        <small>Aplicaciones</small>
 
       </button>
 
 
-      <button
-        class="quick-card"
-        id="whatsappButton"
-      >
+      <button class="quick-card" id="whatsappQuick">
 
         <span>💬</span>
 
-        <strong>
-          WhatsApp
-        </strong>
+        <strong>WhatsApp</strong>
 
-        <small>
-          Atención directa
-        </small>
+        <small>Atención directa</small>
 
       </button>
 
@@ -181,23 +138,13 @@
 
     <!-- ================= INTERNET ================= -->
 
-    <section
-      class="section"
-      id="internet"
-    >
+    <section class="section" id="internet">
 
       <div class="section-title">
 
         <div>
-
-          <span>
-            CONEXIÓN
-          </span>
-
-          <h2>
-            🌐 INTERNET ILIMITADO
-          </h2>
-
+          <span>INTERNET ILIMITADO</span>
+          <h2>Elegí tu servicio</h2>
         </div>
 
       </div>
@@ -210,17 +157,15 @@
         <div class="product-header">
 
           <div class="product-logo cglite-logo">
-            C
+            CG
           </div>
 
           <div>
 
-            <h3>
-              CGLite
-            </h3>
+            <h3>CGLite</h3>
 
             <p>
-              Personal / Claro AR
+              Internet ilimitado
             </p>
 
           </div>
@@ -239,7 +184,7 @@
           </span>
 
           <span class="operator claro">
-            Claro AR
+            Claro
           </span>
 
         </div>
@@ -248,12 +193,14 @@
         <div class="internet-plans">
 
           <button
+            type="button"
             class="internet-plan"
             data-product="CGLite — 7 Días"
             data-price="4500"
           >
 
             <span>
+
               <strong>
                 7 Días
               </strong>
@@ -261,6 +208,7 @@
               <small>
                 Internet ilimitado
               </small>
+
             </span>
 
             <b>
@@ -271,12 +219,14 @@
 
 
           <button
+            type="button"
             class="internet-plan"
             data-product="CGLite — 15 Días"
             data-price="6000"
           >
 
             <span>
+
               <strong>
                 15 Días
               </strong>
@@ -284,6 +234,7 @@
               <small>
                 Internet ilimitado
               </small>
+
             </span>
 
             <b>
@@ -294,12 +245,14 @@
 
 
           <button
+            type="button"
             class="internet-plan"
             data-product="CGLite — 30 Días"
             data-price="8000"
           >
 
             <span>
+
               <strong>
                 30 Días
               </strong>
@@ -307,6 +260,7 @@
               <small>
                 Internet ilimitado
               </small>
+
             </span>
 
             <b>
@@ -321,10 +275,11 @@
         <div class="card-buttons">
 
           <button
+            type="button"
             class="button purple-button"
-            id="trialCglite"
+            id="cgliteTrial"
           >
-            🧪 Solicitar Prueba
+            🎁 Solicitar Prueba
           </button>
 
           <a
@@ -333,7 +288,7 @@
             target="_blank"
             rel="noopener"
           >
-            📲 Descargar APK
+            📲 CGLite APK
           </a>
 
         </div>
@@ -348,17 +303,15 @@
         <div class="product-header">
 
           <div class="product-logo http-logo">
-            H
+            HC
           </div>
 
           <div>
 
-            <h3>
-              HTTP Custom
-            </h3>
+            <h3>HTTP Custom</h3>
 
-            <p class="personal-color">
-              Personal
+            <p>
+              Internet + WhatsApp
             </p>
 
           </div>
@@ -370,9 +323,19 @@
         </div>
 
 
+        <div class="operators">
+
+          <span class="operator personal">
+            Personal
+          </span>
+
+        </div>
+
+
         <div class="internet-plans">
 
           <button
+            type="button"
             class="internet-plan"
             data-product="HTTP Custom — Personal — 30 Días · 1 Dispositivo"
             data-price="7000"
@@ -385,7 +348,7 @@
               </strong>
 
               <small>
-                Internet ilimitado
+                Personal
               </small>
 
             </span>
@@ -398,6 +361,7 @@
 
 
           <button
+            type="button"
             class="internet-plan"
             data-product="HTTP Custom — Personal — 30 Días · 2 Dispositivos"
             data-price="13000"
@@ -410,7 +374,7 @@
               </strong>
 
               <small>
-                Internet ilimitado
+                Personal
               </small>
 
             </span>
@@ -432,7 +396,7 @@
             target="_blank"
             rel="noopener"
           >
-            📲 Descargar APK
+            📲 Descargar HTTP Custom
           </a>
 
         </div>
@@ -444,27 +408,16 @@
 
     <!-- ================= STREAMING ================= -->
 
-    <section
-      class="section"
-      id="streaming"
-    >
+    <section class="section" id="streaming">
 
       <div class="section-title">
 
         <div>
-
-          <span>
-            ENTRETENIMIENTO
-          </span>
-
-          <h2>
-            🍿 STREAMING
-          </h2>
-
+          <span>ENTRETENIMIENTO</span>
+          <h2>Streaming</h2>
         </div>
 
       </div>
-
 
       <div
         class="stream-grid"
@@ -476,23 +429,13 @@
 
     <!-- ================= APPS ================= -->
 
-    <section
-      class="section"
-      id="apps"
-    >
+    <section class="section" id="apps">
 
       <div class="section-title">
 
         <div>
-
-          <span>
-            DESCARGAS
-          </span>
-
-          <h2>
-            📲 DESCARGAR APPS
-          </h2>
-
+          <span>APLICACIONES</span>
+          <h2>Descargas</h2>
         </div>
 
       </div>
@@ -501,14 +444,14 @@
       <div class="apps-list">
 
         <a
-          class="app-download cglite-download"
+          class="app-download"
           href="https://www.mediafire.com/file/1r919ffuo64vpan/CGLite.apk/file"
           target="_blank"
           rel="noopener"
         >
 
           <div class="app-icon cglite-app">
-            C
+            CG
           </div>
 
           <div>
@@ -523,9 +466,7 @@
 
           </div>
 
-          <b>
-            ›
-          </b>
+          <b>›</b>
 
         </a>
 
@@ -538,7 +479,7 @@
         >
 
           <div class="app-icon http-app">
-            H
+            HC
           </div>
 
           <div>
@@ -553,9 +494,7 @@
 
           </div>
 
-          <b>
-            ›
-          </b>
+          <b>›</b>
 
         </a>
 
@@ -564,7 +503,7 @@
     </section>
 
 
-    <!-- ================= WHATSAPP ================= -->
+    <!-- ================= SUPPORT ================= -->
 
     <section class="support">
 
@@ -575,474 +514,431 @@
       <div>
 
         <span>
-          SOPORTE
+          SOPORTE PERSONALNET
         </span>
 
         <h2>
-          ¿Necesitás Ayuda?
+          ¿Necesitás ayuda?
         </h2>
 
         <p>
-          Consultá disponibilidad, compras o activaciones.
+          Estamos disponibles por WhatsApp.
         </p>
 
       </div>
 
+
       <button
+        type="button"
         class="button whatsapp-button"
-        id="supportWhatsapp"
+        id="supportButton"
       >
-        Abrir WhatsApp
+        💬 Hablar por WhatsApp
       </button>
 
     </section>
 
   </main>
 
-
-  <!-- ================= BOTTOM NAV ================= -->
-
-  <nav class="bottom-nav">
-
-    <button
-      class="nav-item active"
-      data-scroll="#inicio"
-    >
-      <span>⌂</span>
-      <small>Inicio</small>
-    </button>
+</div>
 
 
-    <button
-      class="nav-item"
-      data-scroll="#internet"
-    >
-      <span>🌐</span>
-      <small>Internet</small>
-    </button>
+<!-- ================= BOTTOM NAV ================= -->
+
+<nav class="bottom-nav">
+
+  <button
+    class="nav-item active"
+    data-scroll="#inicio"
+  >
+    <span>⌂</span>
+    <small>Inicio</small>
+  </button>
 
 
-    <button
-      class="nav-item"
-      data-scroll="#streaming"
-    >
-      <span>🍿</span>
-      <small>Streaming</small>
-    </button>
+  <button
+    class="nav-item"
+    data-scroll="#internet"
+  >
+    <span>🌐</span>
+    <small>Internet</small>
+  </button>
 
 
-    <button
-      class="nav-item cart-nav"
-      id="bottomCart"
-    >
-      <span>🛒</span>
-      <small>Carrito</small>
-      <b id="bottomCartCount">
-        0
-      </b>
-    </button>
-
-  </nav>
+  <button
+    class="nav-item"
+    data-scroll="#streaming"
+  >
+    <span>🎬</span>
+    <small>Streaming</small>
+  </button>
 
 
-  <!-- ================= MENÚ ================= -->
-
-  <div
-    class="modal"
-    id="menuModal"
+  <button
+    class="nav-item cart-nav"
+    id="bottomCart"
   >
 
-    <div
-      class="modal-bg"
+    <span>🛒</span>
+
+    <b id="bottomCartCount">
+      0
+    </b>
+
+    <small>Carrito</small>
+
+  </button>
+
+</nav>
+
+
+<!-- ================= MENU ================= -->
+
+<div
+  class="modal"
+  id="menuModal"
+>
+
+  <div
+    class="modal-bg"
+    data-close="menuModal"
+  ></div>
+
+
+  <aside class="side-menu">
+
+    <button
+      class="close"
       data-close="menuModal"
-    ></div>
+    >
+      ×
+    </button>
 
 
-    <aside class="side-menu">
+    <div class="menu-logo">
+      PERSONAL<span>NET</span>
+    </div>
+
+    <p>
+      Internet + Streaming
+    </p>
+
+
+    <div class="menu-links">
+
+      <button data-scroll="#inicio">
+        🏠 Inicio
+      </button>
+
+      <button data-scroll="#internet">
+        🌐 Internet
+      </button>
+
+      <button data-scroll="#streaming">
+        🎬 Streaming
+      </button>
+
+      <button data-scroll="#apps">
+        📲 Aplicaciones
+      </button>
+
+      <button id="menuWhatsapp">
+        💬 WhatsApp
+      </button>
+
+    </div>
+
+  </aside>
+
+</div>
+
+
+<!-- ================= CART ================= -->
+
+<div
+  class="modal"
+  id="cartModal"
+>
+
+  <div
+    class="modal-bg"
+    data-close="cartModal"
+  ></div>
+
+
+  <div class="sheet">
+
+    <div class="sheet-header">
+
+      <div>
+
+        <span>
+          PERSONALNET
+        </span>
+
+        <h2>
+          Tu carrito
+        </h2>
+
+      </div>
 
       <button
         class="close"
-        data-close="menuModal"
+        data-close="cartModal"
       >
         ×
       </button>
 
+    </div>
 
-      <div class="menu-logo">
-        PERSONAL<span>NET</span>
-      </div>
-
-      <p>
-        Internet + Streaming
-      </p>
-
-
-      <div class="menu-links">
-
-        <button data-scroll="#inicio">
-          ⌂ Inicio
-        </button>
-
-        <button data-scroll="#internet">
-          🌐 Internet Ilimitado
-        </button>
-
-        <button data-scroll="#streaming">
-          🍿 Streaming
-        </button>
-
-        <button data-scroll="#apps">
-          📲 Descargar Apps
-        </button>
-
-        <button id="menuWhatsapp">
-          💬 WhatsApp
-        </button>
-
-      </div>
-
-    </aside>
-
-  </div>
-
-
-  <!-- ================= CARRITO ================= -->
-
-  <div
-    class="modal"
-    id="cartModal"
-  >
 
     <div
-      class="modal-bg"
-      data-close="cartModal"
+      class="cart-items"
+      id="cartItems"
     ></div>
 
 
-    <section class="sheet">
+    <div
+      class="cart-empty"
+      id="cartEmpty"
+    >
 
-      <div class="sheet-header">
+      <div>🛒</div>
 
-        <div>
+      <strong>
+        Tu carrito está vacío
+      </strong>
 
-          <span>
-            TU PEDIDO
-          </span>
+      <small>
+        Agregá un servicio para continuar.
+      </small>
 
-          <h2>
-            🛒 Carrito
-          </h2>
-
-        </div>
-
-        <button
-          class="close"
-          data-close="cartModal"
-        >
-          ×
-        </button>
-
-      </div>
+    </div>
 
 
-      <div
-        class="cart-items"
-        id="cartItems"
-      ></div>
+    <div
+      class="cart-footer"
+      id="cartFooter"
+    >
 
+      <div class="total">
 
-      <div
-        class="cart-empty"
-        id="cartEmpty"
-      >
+        <span>
+          Total
+        </span>
 
-        <div>
-          🛒
-        </div>
-
-        <strong>
-          Tu carrito está vacío
+        <strong id="cartTotal">
+          $0
         </strong>
 
-        <small>
-          Agregá un producto para continuar.
-        </small>
-
       </div>
 
 
-      <div
-        class="cart-footer"
-        id="cartFooter"
+      <button
+        type="button"
+        class="button primary-button full"
+        id="checkoutButton"
       >
+        Continuar pedido
+      </button>
 
-        <div class="total">
-
-          <span>
-            Total
-          </span>
-
-          <strong id="cartTotal">
-            $0
-          </strong>
-
-        </div>
-
-
-        <button
-          class="button primary-button full"
-          id="checkoutButton"
-        >
-          Continuar Compra
-        </button>
-
-      </div>
-
-    </section>
+    </div>
 
   </div>
 
-
-  <!-- ================= CHECKOUT ================= -->
-
-  <div
-    class="modal"
-    id="checkoutModal"
-  >
-
-    <div
-      class="modal-bg"
-      data-close="checkoutModal"
-    ></div>
+</div>
 
 
-    <section class="sheet">
+<!-- ================= CHECKOUT ================= -->
 
-      <div class="sheet-header">
-
-        <div>
-
-          <span>
-            FINALIZAR
-          </span>
-
-          <h2>
-            💳 Tu Compra
-          </h2>
-
-        </div>
-
-        <button
-          class="close"
-          data-close="checkoutModal"
-        >
-          ×
-        </button>
-
-      </div>
-
-
-      <form id="checkoutForm">
-
-        <label>
-          Nombre
-
-          <input
-            id="customerName"
-            type="text"
-            placeholder="Tu nombre"
-            required
-          >
-
-        </label>
-
-
-        <label>
-          WhatsApp
-
-          <input
-            id="customerPhone"
-            type="tel"
-            inputmode="tel"
-            placeholder="Ej. 3844 546841"
-            required
-          >
-
-        </label>
-
-
-        <label>
-          Forma de pago
-
-          <select id="paymentMethod">
-
-            <option value="Mercado Pago">
-              Mercado Pago
-            </option>
-
-            <option value="Transferencia">
-              Transferencia
-            </option>
-
-          </select>
-
-        </label>
-
-
-        <div class="checkout-summary">
-
-          <span>
-            PRODUCTOS
-          </span>
-
-          <div id="checkoutProducts"></div>
-
-          <div class="total">
-
-            <span>
-              Total
-            </span>
-
-            <strong id="checkoutTotal">
-              $0
-            </strong>
-
-          </div>
-
-        </div>
-
-
-        <button
-          type="submit"
-          class="button primary-button full"
-        >
-          Confirmar Pedido
-        </button>
-
-
-        <p class="payment-note">
-          El pedido se prepara y se envía por WhatsApp para continuar con el pago.
-        </p>
-
-      </form>
-
-    </section>
-
-  </div>
-
-
-  <!-- ================= PRUEBA ================= -->
+<div
+  class="modal"
+  id="checkoutModal"
+>
 
   <div
-    class="modal"
-    id="trialModal"
-  >
-
-    <div
-      class="modal-bg"
-      data-close="trialModal"
-    ></div>
-
-
-    <section class="sheet">
-
-      <div class="sheet-header">
-
-        <div>
-
-          <span>
-            CGLITE
-          </span>
-
-          <h2>
-            🧪 Solicitar Prueba
-          </h2>
-
-        </div>
-
-        <button
-          class="close"
-          data-close="trialModal"
-        >
-          ×
-        </button>
-
-      </div>
-
-
-      <form id="trialForm">
-
-        <label>
-          Operadora
-
-          <select id="trialOperator">
-
-            <option value="Personal">
-              Personal
-            </option>
-
-            <option value="Claro AR">
-              Claro AR
-            </option>
-
-          </select>
-
-        </label>
-
-
-        <label>
-          Nombre
-
-          <input
-            id="trialName"
-            type="text"
-            placeholder="Tu nombre"
-            required
-          >
-
-        </label>
-
-
-        <label>
-          WhatsApp
-
-          <input
-            id="trialPhone"
-            type="tel"
-            inputmode="tel"
-            placeholder="Ej. 3844 546841"
-            required
-          >
-
-        </label>
-
-
-        <button
-          type="submit"
-          class="button purple-button full"
-        >
-          Enviar Solicitud Por WhatsApp
-        </button>
-
-      </form>
-
-    </section>
-
-  </div>
-
-
-  <!-- ================= TOAST ================= -->
-
-  <div
-    class="toast"
-    id="toast"
+    class="modal-bg"
+    data-close="checkoutModal"
   ></div>
 
 
+  <div class="sheet">
+
+    <div class="sheet-header">
+
+      <div>
+
+        <span>
+          PEDIDO
+        </span>
+
+        <h2>
+          Finalizar
+        </h2>
+
+      </div>
+
+      <button
+        class="close"
+        data-close="checkoutModal"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <label>
+      Nombre
+
+      <input
+        id="customerName"
+        type="text"
+        placeholder="Tu nombre"
+      >
+
+    </label>
+
+
+    <label>
+      Teléfono
+
+      <input
+        id="customerPhone"
+        type="tel"
+        placeholder="Tu teléfono"
+      >
+
+    </label>
+
+
+    <div class="checkout-summary">
+
+      <span>
+        Productos
+      </span>
+
+      <div id="checkoutProducts"></div>
+
+      <div class="total">
+
+        <span>
+          Total
+        </span>
+
+        <strong id="checkoutTotal">
+          $0
+        </strong>
+
+      </div>
+
+      <p class="payment-note">
+        Después de enviar tu pedido coordinamos el pago y la activación.
+      </p>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="button whatsapp-button full"
+      id="sendOrder"
+    >
+      💬 Enviar pedido por WhatsApp
+    </button>
+
+  </div>
+
 </div>
+
+
+<!-- ================= TRIAL ================= -->
+
+<div
+  class="modal"
+  id="trialModal"
+>
+
+  <div
+    class="modal-bg"
+    data-close="trialModal"
+  ></div>
+
+
+  <div class="sheet">
+
+    <div class="sheet-header">
+
+      <div>
+
+        <span>
+          PERSONALNET
+        </span>
+
+        <h2>
+          Solicitar prueba
+        </h2>
+
+      </div>
+
+      <button
+        class="close"
+        data-close="trialModal"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <label>
+
+      Nombre
+
+      <input
+        id="trialName"
+        type="text"
+        placeholder="Tu nombre"
+      >
+
+    </label>
+
+
+    <label>
+
+      Línea / Teléfono
+
+      <input
+        id="trialPhone"
+        type="tel"
+        placeholder="Tu número"
+      >
+
+    </label>
+
+
+    <button
+      type="button"
+      class="button whatsapp-button full"
+      id="sendTrial"
+    >
+      🎁 Solicitar prueba
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= TOAST ================= -->
+
+<div
+  class="toast"
+  id="toast"
+></div>
 
 
 <script src="script.js"></script>
 
 </body>
-              </html>
+        </html>
