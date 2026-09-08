@@ -22,7 +22,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 10000,
     oldPrice: 13000,
-    icon: "https://cdn.simpleicons.org/netflix"
+    icon: "N"
   },
 
   {
@@ -49,7 +49,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 5000,
     oldPrice: 7000,
-    icon: "https://cdn.simpleicons.org/hbomax"
+    icon: "H"
   },
 
   {
@@ -58,7 +58,7 @@ const streamingProducts = [
     duration: "2 Meses",
     price: 7500,
     oldPrice: 10000,
-    icon: "https://cdn.simpleicons.org/hbomax"
+    icon: "H"
   },
 
   {
@@ -67,7 +67,7 @@ const streamingProducts = [
     duration: "3 Meses",
     price: 9500,
     oldPrice: 12000,
-    icon: "https://cdn.simpleicons.org/hbomax"
+    icon: "H"
   },
 
   {
@@ -103,7 +103,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 6500,
     oldPrice: 8000,
-    icon: "https://cdn.simpleicons.org/paramountplus"
+    icon: "P+"
   },
 
   {
@@ -121,7 +121,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 4500,
     oldPrice: 7000,
-    icon: "https://cdn.simpleicons.org/appletv"
+    icon: ""
   },
 
   {
@@ -130,7 +130,7 @@ const streamingProducts = [
     duration: "1 Mes",
     price: 5000,
     oldPrice: 7500,
-    icon: "https://cdn.simpleicons.org/youtube"
+    icon: "▶"
   }
 
 ];
@@ -767,14 +767,31 @@ function renderStreaming() {
         "stream-card";
 
 
+      const isImage =
+        typeof product.icon === "string" &&
+        (
+          product.icon.startsWith("http://") ||
+          product.icon.startsWith("https://")
+        );
+
+
       card.innerHTML = `
 
         <div class="stream-logo">
 
-          <img
-            src="${escapeHTML(product.icon)}"
-            alt="${escapeHTML(product.name)}"
-          >
+          ${
+            isImage
+
+              ? `
+                <img
+                  src="${escapeHTML(product.icon)}"
+                  alt="${escapeHTML(product.name)}"
+                  loading="lazy"
+                >
+              `
+
+              : escapeHTML(product.icon)
+          }
 
         </div>
 
